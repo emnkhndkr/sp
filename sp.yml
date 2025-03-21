@@ -1,0 +1,23 @@
+name: C Compile and Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up GCC
+        run: sudo apt-get install -y build-essential
+
+      - name: Compile C program
+        run: gcc sp.c -o sp  # Change 'main.c' to 'hello.c'
+
+      - name: Run C program
+        run: ./sp  # Change './main' to './hello'
