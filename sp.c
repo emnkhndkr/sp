@@ -21,12 +21,17 @@ int main() {
         printf("Incorrect password! Try again.\n");
     }
 
-    for (;;) {
+    while (1) {
         int choice;
         printf("\nAccess Guard: Intelligent Door Control System\n");
         printf("1. Open Door\n2. Close Door\n3. Lock Door\n4. Unlock Door\n5. Check Status\n6. Exit\n");
         printf("Enter your choice: ");
-        scanf("%d", &choice);
+
+        if (scanf("%d", &choice) != 1) {
+            while (getchar() != '\n');
+            printf("Invalid input. Please enter a number.\n");
+            continue;
+        }
 
         switch (choice) {
             case 1: openDoor(&opn, lkd); break;
@@ -43,18 +48,18 @@ int main() {
 }
 
 void setPassword(char *pw) {
-    char ent_pw[10];
+    char ent_pw[20];
     printf("Admin is requested to set a new password: ");
-    scanf("%s", ent_pw);
-    if (strcmp(ent_pw, "") != 0) {
+    scanf("%19s", ent_pw);
+    if (strlen(ent_pw) > 0) {
         strcpy(pw, ent_pw);
     }
 }
 
 int authenticateUser (const char *pw) {
-    char ent_pw[10];
-    printf("User \nEnter the password: ");
-    scanf("%s", ent_pw);
+    char ent_pw[20];
+    printf("User   \nEnter the password: ");
+    scanf("%19s", ent_pw);
     return strcmp(ent_pw, pw) == 0; 
 }
 
